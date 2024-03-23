@@ -157,12 +157,10 @@ counter.addEventListener("click", function() {
         video.style.animation = "identifier 1s linear infinite";
       }, 1000);
       // 判断是否只有一根手指进行操作
-      function touch(e){
         if(e.touches.length > 1) {
           alert("不止一个手指");
           return;
         }
-      }
       //if (e.targetTouches.length > 1) { // 说明不止一个手指
         //clearInterval(audioplay);
         //document.getElementById("t").innerHTML = "";
@@ -182,12 +180,10 @@ counter.addEventListener("click", function() {
       text.innerHTML = "你长按的时间时:";
       
       // 判断是否只有一根手指进行操作
-      function touch(e){
         if(e.touches.length > 1) {
           alert("不止一个手指");
           return;
         }
-      }
       //if (e.touches.length > 1) { // 说明不止一个手指
         //clearInterval(audioplay);
         //document.getElementById("t").innerHTML = "";
