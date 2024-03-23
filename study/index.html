@@ -158,6 +158,8 @@ counter.addEventListener("click", function() {
       }, 1000);
       // 判断是否只有一根手指进行操作
         if(e.touches.length > 1) {
+          clearInterval(audioplay);
+          document.getElementById("t").innerHTML = "";
           alert("不止一个手指");
           return;
         }
@@ -181,6 +183,8 @@ counter.addEventListener("click", function() {
       
       // 判断是否只有一根手指进行操作
         if(e.touches.length > 1) {
+          clearInterval(audioplay);
+          document.getElementById("t").innerHTML = "";
           alert("不止一个手指");
           return;
         }
