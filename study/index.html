@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+  <link rel="stylesheet" href="img/favicon.ico">
+  <title>处理移动端单击事件</title>
+  <style>
+    body,html{
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      -khtml-user-select:none;
+      -moz-user-select:none;
+      -ms-user-select:none;
+      /* pointer-events: none; */
+      user-select:none;
+      -o-user-select:none;
+      margin: 0px;
+      padding: 0px;
+    }
+    body{
+      background-color: #9d88d3f5;
+    }
+    #loader {
+      position: relative;
+      border: 16px solid #f3f3f3;
+      border-top: 16px solid #3498db; 
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      top: calc(50% + 10vh);
+      animation: spin 2s linear infinite;
+      margin:auto;
+      z-index: 9999;
+    }
+    #content {
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #counter-button {
+      background-color: #574f84;
+      border: none;
+      border-radius: 16px;
+      height: 45px;
+      min-width: 120px;
+      display: block;
+      margin: 0 auto;
+      transform: translateY(47vh);
+      font-size: 1em;
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      color: white;
+      outline: none;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    }
+    #loader-container{
+      width: 100%;
+      height: 200px;
+      font-size: 2em;
+      padding: 0.67em 0;
+    }
+    p{
+      font-size: 2em;
+      text-align: center;
+    }
+    .text{
+      width: 100%;
+      height: 200px;
+      font-size: 2em;
+      padding: 0.67em 0;
+    }
+    #bg-filter {
+      position: relative;
+      background: url(video/hertaa.gif);
+      background-size: cover;
+      display: block;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      top: calc(50% + 5vh);
+    }
+    #video{
+      display: none;
+      background: url(video/hertaa1.gif);
+      background-size: cover;
+      width: 250px;
+      height: 250px;
+      float: right;
+    }
+    @keyframes identifier {
+      0% {transform: translateX(100vw);}
+      100% {transform: translateX(-100vw);}
+    }
+  </style>
+</head>
+<body>
+<div id="loader-container">
+  <p id="tx">最后一组的作业</p>
+  <div id="bg-filter"></div>
+  <div id="loader"></div>
+</div>
+<div id="content" style="height: 100vh; width: 100vw">
+  <div class="text">
+    <p id="tp">你准备好了吗?</p>
+    <p id="t"></p>
+  </div>
+  <div id="video"></div>
+    <button id="counter-button" onclick="" style="display: block;">准备好了</button>
+</div>
+</body>
+<script>
+var audios = [
+  {path:"audio/gululu.mp3"},
+  {path:"audio/kuru1.mp3"},
+  {path:"audio/转圈圈.mp3"},
+  {path:"audio/转圈圈咯.mp3"},
+  {path:"audio/kuru2.mp3"},
+];
+var audioplay;
+window.onload = function() {
+  var loadercc = document.getElementById('loader-container');
+  var loader = document.getElementById('loader');
+  var content = document.getElementById('content');
+  setTimeout(function() {
+    loadercc.style.display = 'none';
+    loader.style.display = 'none';
+    content.style.display = 'block';
+  }, 6000);
+};
+var text = document.getElementById("tp");
+var counter = document.getElementById("counter-button");
+counter.addEventListener("click", function() {
+  text.innerHTML = "点击下面按钮开始吧!";
+  this.innerHTML = "开始";
+  counter.addEventListener("click", function() {
+    text.innerHTML = "长按屏幕开始计时";
+    counter.style.display = "none";
+    // 获取元素
+    var video = document.getElementById("video");
+    var div = document.getElementById("content");
+    // 定义全局变量：记录手指开始触摸的时间、记录当前手指的坐标（X、Y）
+    var startTime, startX, startY;
+    div.addEventListener("touchstart", function (e) {
+      audios.currentTime = 0;
+      document.getElementById("t").innerHTML = "";
+      audioplay = setInterval(function() {
+        // 随机播放
+        var randomIndex = Math.floor(Math.random() * audios.length);
+        var audioUrl = audios[randomIndex].path;
+        var audio = new Audio(audioUrl);
+        audio.play()  
+        video.style.display = "block";
+        video.style.animation = "identifier 1s linear infinite";
+      }, 1000);
+      // 判断是否只有一根手指进行操作
+      if (e.targetTouches.length > 1) { // 说明不止一个手指
+        clearInterval(audioplay);
+        document.getElementById("t").innerHTML = "";
+        return;
+      }
+      // 记录手指开始触摸的时间
+      startTime = Date.now();
+      // 记录当前手指的坐标
+      startX = e.targetTouches[0].clientX;
+      startY = e.targetTouches[0].clientY;
+      // 来做一些与事件相关的初始化操作
+      e.preventDefault();
+    })
+    div.addEventListener("touchend", function (e) {
+      video.style.display = "none";
+      text.innerHTML = "你长按的时间时:";
+      // 判断是否只有一根手指进行操作
+      if (e.changedTouches.length > 1) { //说明不止一个手指
+        clearInterval(audioplay);
+        document.getElementById("t").innerHTML = "";
+        return;
+      }
+      // 判断松开手指时的坐标与触摸开始时的坐标的距离差异
+      var endX = e.changedTouches[0].clientX;
+      var endY = e.changedTouches[0].clientY;
+      // 这里暂且将距离差异定为6
+      if (Math.abs(endX - startX) > 6 || Math.abs(endY - startY) > 6) {
+        alert("请不要拖动屏幕");
+        clearInterval(audioplay);
+        document.getElementById("t").innerHTML = "";
+        return;
+      }
+      // 判断时间差异  100ms
+      console.log(Date.now() - startTime);
+      if (Date.now() - startTime > 100) { //长按操作
+        document.getElementById("t").innerHTML = ((Date.now() - startTime) / 1000 +'秒');
+      }
+      //取消定时操作
+      clearInterval(audioplay);
+    })
+  })
+});
+</script>
+</html>
