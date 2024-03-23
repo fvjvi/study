@@ -144,14 +144,6 @@ counter.addEventListener("click", function() {
     var div = document.getElementById("content");
     // 定义全局变量：记录手指开始触摸的时间、记录当前手指的坐标（X、Y）
     var startTime, startX, startY;
-
-    function touch(e){
-        if(e.touches.length > 1) {
-          alert("不止一个手指");
-          return;
-        }
-      }
-    
     div.addEventListener("touchstart", function (e) {
       audios.currentTime = 0;
       document.getElementById("t").innerHTML = "";
@@ -185,6 +177,12 @@ counter.addEventListener("click", function() {
       text.innerHTML = "你长按的时间时:";
       
       // 判断是否只有一根手指进行操作
+      function touch(e){
+        if(e.touches.length > 1) {
+          alert("不止一个手指");
+          return;
+        }
+      }
       //if (e.touches.length > 1) { // 说明不止一个手指
         //clearInterval(audioplay);
         //document.getElementById("t").innerHTML = "";
