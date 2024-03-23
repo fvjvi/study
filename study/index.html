@@ -158,8 +158,8 @@ counter.addEventListener("click", function() {
       }, 1000);
       // 判断是否只有一根手指进行操作
         if(e.touches.length > 1) {
-          alert("不止一个手指");
-          return;
+          alert("你作弊了，网页将会刷新，请重新开始!");
+          location.reload(GET);
         }
       //if (e.targetTouches.length > 1) { // 说明不止一个手指
         //clearInterval(audioplay);
@@ -181,8 +181,8 @@ counter.addEventListener("click", function() {
       
       // 判断是否只有一根手指进行操作
         if(e.touches.length > 1) {
-          alert("不止一个手指");
-          return;
+          alert("你作弊了，网页将会刷新，请重新开始!");
+          location.reload(GET);
         }
       //if (e.touches.length > 1) { // 说明不止一个手指
         //clearInterval(audioplay);
