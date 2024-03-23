@@ -175,13 +175,15 @@ counter.addEventListener("click", function() {
     div.addEventListener("touchend", function (e) {
       video.style.display = "none";
       text.innerHTML = "你长按的时间时:";
+      
       // 判断是否只有一根手指进行操作
-      if (e.changedTouches.length > 1) { //说明不止一个手指
-        clearInterval(audioplay);
-        document.getElementById("t").innerHTML = "";
-        alert("不止一个手指");
-        return;
+      //if (e.changedTouches.length > 1) { //说明不止一个手指
+        //clearInterval(audioplay);
+        //document.getElementById("t").innerHTML = "";
+        //alert("不止一个手指");
+        //return;
       }
+                         
       // 判断松开手指时的坐标与触摸开始时的坐标的距离差异
       var endX = e.changedTouches[0].clientX;
       var endY = e.changedTouches[0].clientY;
