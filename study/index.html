@@ -193,7 +193,7 @@ counter.addEventListener("click", function() {
       if (Date.now() - startTime > 100) { //长按操作
         document.getElementById("t").innerHTML = ((Date.now() - startTime) / 1000 +'秒');
       }
-      if (Date.now() - startTime > 10000 || Date.now() - startTime < 11000) { 
+      if (Date.now() - startTime > 10000 && Date.now() - startTime < 11000) { 
         alert("Good");
       }
       //取消定时操作
