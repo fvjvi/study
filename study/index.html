@@ -236,6 +236,8 @@ counter.addEventListener("click", function() {
       }
       if (Date.now() - startTime > 10000 && Date.now() - startTime < 11000) { 
         box.style.display = "block";
+      }else{
+        alert("请按住达到10秒！")
       }
       //取消定时操作
       clearInterval(audioplay);
