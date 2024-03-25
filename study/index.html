@@ -146,6 +146,7 @@ counter.addEventListener("click", function() {
     // 定义全局变量：记录手指开始触摸的时间、记录当前手指的坐标（X、Y）
     var startTime, startX, startY;
     div.addEventListener("touchstart", function (e) {
+      text.innerHTML = "长按10秒!";
       audios.currentTime = 0;
       document.getElementById("t").innerHTML = "";
       audioplay = setInterval(function() {
