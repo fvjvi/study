@@ -230,7 +230,6 @@ counter.addEventListener("click", function() {
         return;
       }
       // 判断时间差异  100ms
-      console.log(Date.now() - startTime);
       if (Date.now() - startTime > 100) { //长按操作
         document.getElementById("t").innerHTML = ((Date.now() - startTime) / 1000 +'秒');
       }
