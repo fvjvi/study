@@ -106,27 +106,6 @@
       display: none;
       top: 30vh;
     }
-    .box div{
-      width: 100%;
-      height: 100%;
-      border: 2px solid #00b3ff;
-      border-radius: 50%;
-      box-shadow: 0 0 10px blueviolet;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-    }
-    @keyframes xuanzhuan {
-        0%{
-            transform: rotateX(0deg) rotateY(0deg);
-        }
-        50%{
-            transform: rotateX(720deg) rotateY(720deg);
-        }
-        100%{
-            transform: rotateX(1080deg) rotateY(1080deg);
-        }
-    }
   </style>
 </head>
 <body>
@@ -142,7 +121,6 @@
   </div>
   <div id="video"></div>
   <button id="counter-button" onclick="" style="display: block;">准备好了</button>
-  <div class="box"></div>
 </div>
 </body>
 <script>
@@ -153,12 +131,6 @@ var audios = [
   {path:"audio/转圈圈咯.mp3"},
   {path:"audio/kuru2.mp3"},
 ];
-var box=document.querySelector(".box");
-var boxChild=box.children;
-for (let i = 0; i < 15; i++) {
-  box.innerHTML +="<div></div>";
-  boxChild[i].style.transform="rotateY("+45*i+"deg)"
-}
 var audioplay;
 window.onload = function() {
   var loadercc = document.getElementById('loader-container');
